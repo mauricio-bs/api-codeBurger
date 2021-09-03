@@ -1,0 +1,29 @@
+Dockerhub.com/_postgres
+
+* Criar container * => docker run --name codeburger-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+
+--name => nome do container
+
+-e => Senha
+
+-p => Porta_do_Container:Porta_do_Computador
+
+-d => Imagem a ser instalada
+
+docker ps => mostra todos os containers "up"
+
+docker ps -a => mostra todos os containers existentes
+
+docker ps stop <container> => Para um container
+
+docker ps start <container> => Inicia um container
+
+-----------------------------------------------------------
+
+Postbird / DBeaver
+
+Interface grafica para o postgres
+
+-----------------------------------------------------
+
+* Migrations *
