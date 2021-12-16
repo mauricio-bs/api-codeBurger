@@ -18,13 +18,9 @@ class UserController {
     const schema = yup.object().shape({
       name: yup.string().required(),
       email: yup.string().email().required(),
-      password_hash: yup.string().required(),
+      password: yup.string().required(),
       admin: yup.boolean(),
     })
-
-    // if (!(await schema.validateSync(req.body))) {
-    //   return res.status(400).json({})
-    // }
 
     try {
       // Validate data recived
@@ -40,7 +36,9 @@ class UserController {
     const userExists = User.findOne({ where: { email } })
 
     // User already exists
-    if (userExists) res.status(400).json({ error: 'User already exists' })
+    if (userExists) {
+      return res.status(409).json({ error: 'User already exists' })
+    }
 
     // Create user
     const user = await User.create({

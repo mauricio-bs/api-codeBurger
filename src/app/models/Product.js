@@ -19,6 +19,7 @@ class Products extends Model {
         sequelize,
       }
     )
+    return this
   }
 }
 

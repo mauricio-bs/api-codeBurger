@@ -11,6 +11,7 @@ module.exports = {
   },
   rules: {
     camelcase: 'off',
+    'prefer-const': 'off',
     'prettier/prettier': 'error',
   },
 }
