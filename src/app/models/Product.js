@@ -5,8 +5,7 @@ class Products extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        price: Sequelize.INTEGER,
-        category: Sequelize.STRING,
+        price: Sequelize.DOUBLE,
         path: Sequelize.STRING,
         url: {
           type: Sequelize.VIRTUAL,
@@ -20,6 +19,13 @@ class Products extends Model {
       }
     )
     return this
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Category, {
+      foreignKey: 'category_id',
+      as: 'category',
+    })
   }
 }
 
