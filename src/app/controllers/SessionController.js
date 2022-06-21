@@ -12,21 +12,25 @@ class SessionController {
 
     const userEmailOrPasswordIncorrect = () => {
       return res
-        .status(400)
+        .status(401)
         .json({ error: 'Make sure yur password or email are correct' })
     }
 
-    if (!(await schema.isValid(req.body))) userEmailOrPasswordIncorrect()
+    if (!(await schema.isValid(req.body))) {
+      userEmailOrPasswordIncorrect()
+    }
 
     const { email, password } = req.body
 
-    const user = User.findOne({ where: { email } })
+    const user = await User.findOne({ where: { email } })
 
     if (!user) {
       userEmailOrPasswordIncorrect()
     }
 
-    if (!(await user.checkPassword(password))) userEmailOrPasswordIncorrect()
+    if (!(await user.checkPassword(password))) {
+      userEmailOrPasswordIncorrect()
+    }
 
     return res.status(200).json({
       id: user.id,
@@ -35,6 +39,7 @@ class SessionController {
       admin: user.admin,
       token: jwt.sign({ id: user.id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
+        subject: user.id,
       }),
     })
   }
