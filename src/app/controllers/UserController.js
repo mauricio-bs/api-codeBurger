@@ -33,7 +33,7 @@ class UserController {
     const { name, email, password, admin } = req.body
 
     // Find user by email
-    const userExists = User.findOne({ where: { email } })
+    const userExists = await User.findOne({ where: { email } })
 
     // User already exists
     if (userExists) {
@@ -48,6 +48,7 @@ class UserController {
       password,
       admin,
     })
+
     return res.status(201).json({ id: user.id, name, email, admin })
   }
 }
