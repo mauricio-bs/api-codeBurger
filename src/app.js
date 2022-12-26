@@ -3,6 +3,7 @@ import routes from './routes'
 import { resolve } from 'path'
 import cors from 'cors'
 
+import 'dotenv/config'
 import './database'
 
 class App {
